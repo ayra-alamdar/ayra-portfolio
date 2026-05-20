@@ -78,6 +78,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "Ayra Alamdar" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:title", content: "Ayra Alamdar — Content Creator & Brand Strategist" },
+      { name: "twitter:title", content: "Ayra Alamdar — Content Creator & Brand Strategist" },
+      { property: "og:description", content: "Portfolio of Ayra Alamdar — brand-focused content, social media strategy and visual storytelling." },
+      { name: "twitter:description", content: "Portfolio of Ayra Alamdar — brand-focused content, social media strategy and visual storytelling." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/ed5e8564-0e76-4c80-82d8-d3919ef634e2/id-preview-2e1ef629--b641a5e6-37c6-4ee7-87e1-95107689f096.lovable.app-1779239517918.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/ed5e8564-0e76-4c80-82d8-d3919ef634e2/id-preview-2e1ef629--b641a5e6-37c6-4ee7-87e1-95107689f096.lovable.app-1779239517918.png" },
     ],
     links: [
       {
