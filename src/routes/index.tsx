@@ -1,9 +1,21 @@
 import { createFileRoute } from "@tanstack/react-router";
 import portrait from "@/assets/portrait.jpg";
-import workCarousel from "@/assets/work-carousel.jpg";
-import workBranding from "@/assets/work-branding.jpg";
-import workCampaign from "@/assets/work-campaign.jpg";
+import workCampaign from "@/assets/work-campaign.png";
 import workReels from "@/assets/work-reels.jpg";
+import reelVideo from "@/assets/reel.mp4";
+import gridBranding from "@/assets/Grid.png";
+import carousel1 from "@/assets/1.jpeg";
+import carousel2 from "@/assets/2.jpeg";
+import carousel3 from "@/assets/3.jpeg";
+import carousel4 from "@/assets/4.jpeg";
+import carousel5 from "@/assets/5.jpeg";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -66,7 +78,23 @@ const skills = [
   },
 ];
 
-const projects = [
+const carouselImages = [carousel1, carousel2, carousel3, carousel4, carousel5];
+
+type Project = {
+  no: string;
+  cat: string;
+  title: string;
+  desc: string;
+  role: string;
+  tools: string[];
+  img: string;
+  carousel?: string[];
+  fit?: "cover" | "contain";
+  link?: { label: string; href: string };
+  video?: string;
+};
+
+const projects: Project[] = [
   {
     no: "01",
     cat: "Instagram Carousels",
@@ -74,7 +102,12 @@ const projects = [
     desc: "Editorial carousel series designed to teach, save and reshare — built around a fixed type system and a 6-slide story arc.",
     role: "Content Creator · Designer",
     tools: ["Canva", "Figma", "ChatGPT"],
-    img: workCarousel,
+    img: carousel1,
+    carousel: carouselImages,
+    link: {
+      label: "View on Instagram",
+      href: "https://www.instagram.com/p/DQ32_06DH6M/?igsh=MTNqanhteW5ubnAxNQ==",
+    },
   },
   {
     no: "02",
@@ -83,7 +116,12 @@ const projects = [
     desc: "Built a 9-grid visual identity — palette, type pairings and post templates — so every asset reads as one voice across the feed.",
     role: "Brand Designer · Strategist",
     tools: ["Canva", "Pinterest", "Pexels"],
-    img: workBranding,
+    img: gridBranding,
+    fit: "contain",
+    link: {
+      label: "View on Instagram",
+      href: "https://www.instagram.com/fortrayglobalservices?igsh=MXVpN2d1d2ZndGUxcw==",
+    },
   },
   {
     no: "03",
@@ -91,7 +129,7 @@ const projects = [
     title: "End-to-end launch campaign",
     desc: "Concept, calendar and creative for a multi-platform launch — paired with copy hooks and engagement prompts tied to brand tone.",
     role: "Content Strategist",
-    tools: ["Notion", "Canva", "SEMrush"],
+    tools: ["Pinterest", "Canva", "SEMrush"],
     img: workCampaign,
   },
   {
@@ -102,6 +140,7 @@ const projects = [
     role: "Editor · Creator",
     tools: ["CapCut", "VN", "CapCut Pro"],
     img: workReels,
+    video: reelVideo,
   },
 ];
 
@@ -142,7 +181,7 @@ const experience = [
   {
     role: "Content Creator & Digital Marketing Associate Trainee",
     detail:
-      "Shipped social calendars and brand-aligned visuals end-to-end — Canva design, CapCut edits and platform-native copy.",
+      "Shipped social calendars and brand-aligned visuals end-to-end. Canva design, CapCut edits and platform-native copy.",
   },
   {
     role: "Freelance Content Creator & Brand Growth Specialist",
@@ -202,26 +241,67 @@ function Hero() {
     <section id="top" className="relative">
       <div className="mx-auto max-w-7xl px-6 lg:px-10 pt-20 pb-24 lg:pt-32 lg:pb-40">
         <div className="flex items-center gap-3 text-xs uppercase tracking-[0.25em] text-muted-foreground mb-10">
-          <span className="h-px w-10 bg-foreground/40" />
-          Portfolio · 2026
+          <span className="relative flex h-2 w-2">
+            <span className="absolute inline-flex h-full w-full rounded-full bg-clay opacity-60 animate-ping" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-clay" />
+          </span>
+          Available for projects
         </div>
-        <h1 className="font-display text-[clamp(3rem,10vw,9rem)] leading-[0.95] tracking-tight text-balance">
-          Content that <em className="text-clay not-italic">looks</em> <br className="hidden md:block" />
-          like the brand <span className="italic text-muted-foreground">— sounds</span>
+        <h1 className="font-display text-[clamp(3.5rem,11vw,10rem)] leading-[0.92] tracking-tight text-balance">
+          Content that <em className="text-clay not-italic">looks</em>
+          <br className="hidden md:block" />
+          like the brand{" "}
+          <span className="italic text-muted-foreground">sounds</span>
           <br className="hidden md:block" />
           like the brand.
         </h1>
-        <div className="mt-12 grid lg:grid-cols-12 gap-10 items-end">
-          <p className="lg:col-span-6 text-lg leading-relaxed text-muted-foreground max-w-xl">
-            I'm <span className="text-foreground">Ayra Alamdar</span> — a content creator and
-            digital marketer building brand-led visuals, social strategy and storytelling for
-            Instagram, Facebook and LinkedIn.
+        <div className="mt-14 grid lg:grid-cols-12 gap-10 items-end">
+          <p className="lg:col-span-6 text-lg lg:text-xl leading-relaxed text-muted-foreground max-w-xl">
+            I&apos;m <span className="text-foreground">Ayra Alamdar</span>, a content
+            creator and digital marketer building brand-led visuals, social strategy and
+            storytelling for Instagram, Facebook and LinkedIn.
           </p>
-          <div className="lg:col-span-6 lg:text-right text-sm text-muted-foreground space-y-1">
-            <p>Based remote · open to collaborations</p>
-            <p className="text-foreground">Brand · Social · Strategy · AI</p>
+          <div className="lg:col-span-6 flex flex-wrap items-center gap-4 lg:justify-end">
+            <a
+              href="#work"
+              className="inline-flex items-center gap-2 bg-foreground text-background px-6 py-3 rounded-full text-sm hover:gap-3 transition-all"
+            >
+              View work <span>→</span>
+            </a>
+            <a
+              href="#contact"
+              className="inline-flex items-center gap-2 border border-foreground px-6 py-3 rounded-full text-sm hover:bg-foreground hover:text-background transition-all"
+            >
+              Get in touch
+            </a>
           </div>
         </div>
+        <dl className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 border-t border-border pt-8">
+          <div>
+            <dt className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-2">
+              Focus
+            </dt>
+            <dd className="text-foreground text-sm">Brand &amp; Social</dd>
+          </div>
+          <div>
+            <dt className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-2">
+              Based
+            </dt>
+            <dd className="text-foreground text-sm">Remote</dd>
+          </div>
+          <div>
+            <dt className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-2">
+              Tools
+            </dt>
+            <dd className="text-foreground text-sm">Canva · CapCut</dd>
+          </div>
+          <div>
+            <dt className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-2">
+              Platforms
+            </dt>
+            <dd className="text-foreground text-sm">IG · FB · LinkedIn</dd>
+          </div>
+        </dl>
       </div>
     </section>
   );
@@ -235,6 +315,7 @@ function Marquee() {
     "Storytelling",
     "Canva",
     "CapCut",
+    "Pinterest",
     "SEO + AEO",
     "AI Workflows",
     "Campaigns",
@@ -358,16 +439,67 @@ function Work() {
             }`}
           >
             <div className="lg:col-span-7">
-              <div className="overflow-hidden rounded-sm bg-muted aspect-[4/3] group">
-                <img
-                  src={p.img}
-                  alt={p.title}
-                  width={1280}
-                  height={960}
-                  loading="lazy"
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-              </div>
+              {p.carousel ? (
+                <div className="rounded-sm bg-sand/40 border border-border p-6 lg:p-8">
+                  <Carousel
+                    opts={{ loop: true, align: "center" }}
+                    className="w-full"
+                  >
+                    <CarouselContent className="-ml-4">
+                      {p.carousel.map((src, idx) => (
+                        <CarouselItem
+                          key={idx}
+                          className="pl-4 basis-full sm:basis-2/3 md:basis-1/2"
+                        >
+                          <div className="overflow-hidden rounded-sm bg-muted aspect-square">
+                            <img
+                              src={src}
+                              alt={`${p.title} — slide ${idx + 1}`}
+                              loading="lazy"
+                              className="h-full w-full object-cover"
+                            />
+                          </div>
+                        </CarouselItem>
+                      ))}
+                    </CarouselContent>
+                    <CarouselPrevious className="left-2 bg-background/80 border-border text-foreground hover:bg-background" />
+                    <CarouselNext className="right-2 bg-background/80 border-border text-foreground hover:bg-background" />
+                  </Carousel>
+                </div>
+              ) : p.video ? (
+                <div className="rounded-sm bg-sand/40 border border-border p-8 lg:p-12 flex items-center justify-center">
+                  <div className="relative w-full max-w-[280px] md:max-w-[320px] aspect-[9/16] overflow-hidden rounded-2xl border border-border bg-muted shadow-lg">
+                    <video
+                      src={p.video}
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      poster={p.img}
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                </div>
+              ) : (
+                <div
+                  className={`overflow-hidden rounded-sm aspect-[4/3] group ${
+                    p.fit === "contain" ? "bg-sand/40 border border-border" : "bg-muted"
+                  }`}
+                >
+                  <img
+                    src={p.img}
+                    alt={p.title}
+                    width={1280}
+                    height={960}
+                    loading="lazy"
+                    className={`h-full w-full transition-transform duration-700 ${
+                      p.fit === "contain"
+                        ? "object-contain p-4"
+                        : "object-cover group-hover:scale-105"
+                    }`}
+                  />
+                </div>
+              )}
             </div>
             <div className="lg:col-span-5">
               <div className="flex items-baseline gap-4 text-xs uppercase tracking-[0.25em] text-muted-foreground">
@@ -386,6 +518,16 @@ function Work() {
                 <dt className="text-muted-foreground">Focus</dt>
                 <dd className="text-right">Brand identity & consistency</dd>
               </dl>
+              {p.link && (
+                <a
+                  href={p.link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 mt-8 text-sm border-b border-foreground pb-1 hover:gap-3 transition-all"
+                >
+                  {p.link.label} <span>→</span>
+                </a>
+              )}
             </div>
           </article>
         ))}
@@ -496,17 +638,20 @@ function Contact() {
           deserves <em className="text-clay not-italic">better content?</em>
         </h2>
         <a
-          href="mailto:hello@ayra.studio"
+          href="mailto:ayraalamdar309@gmail.com"
           className="inline-flex items-center gap-3 mt-12 text-lg border-b border-foreground pb-1 hover:gap-5 transition-all"
         >
-          hello@ayra.studio <span>→</span>
+          ayraalamdar309@gmail.com <span>→</span>
         </a>
         <div className="mt-16 flex items-center justify-center gap-8 text-sm text-muted-foreground">
-          <a href="#" className="hover:text-foreground transition">Instagram</a>
-          <span>·</span>
-          <a href="#" className="hover:text-foreground transition">LinkedIn</a>
-          <span>·</span>
-          <a href="#" className="hover:text-foreground transition">Behance</a>
+          <a
+            href="https://linkedin.com/in/ayra-alamdar"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-foreground transition"
+          >
+            LinkedIn
+          </a>
         </div>
       </div>
     </section>
